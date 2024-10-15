@@ -1,0 +1,9 @@
+:root{
+    --store-information-color:#FAF3EA
+}
+
+.store__information{
+    background-color: var(--store-information-color);
+    width: 100%;
+    height: 200px;
+}

@@ -1,0 +1,37 @@
+#banner__home{
+    overflow-y: hidden;
+    position: relative;
+
+    /* Image for banner */
+    img{
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+
+        @media screen and (min-width:768px){
+            height: 600px;
+        }
+    }
+
+    /* Card message */
+    #card__message{
+        position: absolute;
+        background-color: #FFF3E3;
+        font-size: 1.1rem;
+        top: 5rem;
+        padding: 1.5rem;
+
+        @media screen and (min-width:768px){
+            top: 18rem;
+            height: 362px;
+            width: 643px;
+            right: 0;
+            transform: translateX(-10%);
+            padding: 4rem;
+        }
+    }
+
+    @media screen and (min-width:768px){
+        height: 600px;
+    }
+}
