@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ProductSchema } from './dtos/product.dto';
+import { UpdateProductDto } from "./dtos/updateProduct.dto";
 import { PrismaService } from 'src/database/PrismaService';
 
 @Injectable()
@@ -54,5 +55,22 @@ export class ProductsRepository{
 
         // return product
         return product
+    }
+
+    // Update one product
+    async updateProduct(id:number, data:UpdateProductDto){
+        await this.prisma.product.update({
+            where:{
+                id:id
+            },
+            data:{
+                name:data.name,
+                price:data.price,
+                discount_price:data.discount_price,
+                discount_percent:data.discount_percent,
+                image_link:data.image_link,
+                updated_date: new Date().toISOString()
+            }
+        })
     }
 }
