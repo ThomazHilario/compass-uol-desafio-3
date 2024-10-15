@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductSchema } from './dtos/product.dto';
-import { json } from 'node:stream/consumers';
 
 @Controller('products')
 export class ProductsController {

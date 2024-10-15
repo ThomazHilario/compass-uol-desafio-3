@@ -7,6 +7,10 @@ export class ProductSchema{
 
     @IsString()
     @IsNotEmpty()
+    subTitle:string
+
+    @IsString()
+    @IsNotEmpty()
     sku:string
 
     @IsNumber()
