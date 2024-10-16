@@ -5,6 +5,7 @@ import { StoreInformation } from "../../Components/StoreInformation"
 export const Home = () => {
     return (
         <main>
+            {/* Banner */}
             <BannerHome/>
 
             <section>
