@@ -1,0 +1,46 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 3rem 6rem;
+
+    /* Reset css ul in footer  */
+    ul{
+        list-style: none;
+        display: flex;
+    }
+
+    ul:nth-child(1){
+        display: flex;
+        gap: 15rem;
+
+        /* list item for ul */
+        li{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        li:nth-child(n+2) {
+            h3{
+                color: gray;
+                font-size: 1rem;
+            }
+        }
+
+        /* links__furniro */
+        .links__furniro > menu{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Select ul for li */
+        li > ul{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem; 
+        }
+    }
+}
