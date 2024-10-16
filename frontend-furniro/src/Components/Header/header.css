@@ -35,7 +35,6 @@
 
             /* links */
             li > a{
-                text-decoration: none;
                 color: var(--font-color);
                 font-size: 1rem;
                 font-optical-sizing: auto;

@@ -1,46 +1,112 @@
+:root{
+    --footer-font-color:#9F9F9F;
+}
+
 footer{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: 3rem;
-    padding: 3rem 6rem;
+    padding: 3rem 0 ;
 
-    /* Reset css ul in footer  */
-    ul{
-        list-style: none;
+    
+    section{
         display: flex;
-    }
+        flex-direction: column;
+        gap: 2rem;
+        width: 83vw;
 
-    ul:nth-child(1){
-        display: flex;
-        gap: 15rem;
-
-        /* list item for ul */
-        li{
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        li:nth-child(n+2) {
-            h3{
-                color: gray;
-                font-size: 1rem;
-            }
-        }
-
-        /* links__furniro */
-        .links__furniro > menu{
+        /* Reset css ul in footer  */
+        ul{
             list-style: none;
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
         }
-
-        /* Select ul for li */
-        li > ul{
+    
+        ul:nth-child(1){
             display: flex;
-            flex-direction: column;
-            gap: 2rem; 
+            flex-wrap: wrap;
+            gap: 5rem;
+    
+            /* list item for ul */
+            li{
+                display: flex;     
+                flex-direction: column;
+                gap: 2rem;
+                flex-grow: 1;
+
+                /* first li */
+                &:nth-child(1){
+                    h2{
+                        font-weight: 700;
+                        font-size: 1.5rem;
+                    }
+
+                    address{
+                        width: 285px;
+                        color: var(--footer-font-color);
+                    }
+                }
+                
+                /* Select h3 in li */
+                &:nth-child(n+2) {
+                    h3{
+                        color: var(--footer-font-color);
+                        font-size: 2rem;
+                        font-weight: 500;
+
+                        @media screen and (min-width:768px){    
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                /* links__furniro */
+                &.links__furniro > menu{
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+
+                    li{
+                        font-weight: 500;
+                    }
+                } 
+
+                /* Select ul for li */
+                &.help__li ul{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem; 
+
+                    li{
+                        font-weight: 500;
+                    }
+                }
+
+                /* Newsletter css */
+                &:nth-child(4){
+                    form{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+
+                        input{
+                            font-size: 0.8rem;
+                            outline: none;
+                            border:0;
+                            border-bottom: 1px solid black;
+                        }
+
+                        button{
+                            background-color: transparent;
+                            border-bottom: 1px solid black;
+                        }
+
+                        @media screen and (min-width:768px){
+                            flex-direction: row;
+                        }
+                    }
+                }
+            }             
         }
     }
 }
