@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsString, IsNotEmpty } from 'class-validator'
+import { IsBoolean, IsNumber, IsString, IsNotEmpty, IsArray, ArrayNotEmpty } from 'class-validator'
 
 export class ProductSchema{
     @IsString()
@@ -40,7 +40,9 @@ export class ProductSchema{
     @IsString()
     image_link:string
 
-    @IsString()
-    other_images_link:string
+    @IsArray()
+    @ArrayNotEmpty()
+    @IsString({each:true})
+    other_images_link:string[]
 
 }

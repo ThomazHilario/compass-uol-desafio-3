@@ -40,7 +40,7 @@ model Product {
   discount_percent  Int
   is_new            Boolean
   image_link        String
-  other_images_link String
+  other_images_link String[]
   created_date      DateTime @default(now())
   updated_date      DateTime @default(now())
 
