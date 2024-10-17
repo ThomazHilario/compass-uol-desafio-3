@@ -1,9 +1,6 @@
 // React
 import { useState, useEffect } from "react"
 
-// React Router Dom
-import { Link } from "react-router-dom"
-
 //Interfaces
 import { CategoryProps } from "../../Interfaces/category-type"
 import { ProductProps } from "../../Interfaces/product-type"
@@ -13,6 +10,7 @@ import { BannerHome } from "../../Components/Banner-Home"
 import { StoreInformation } from "../../Components/StoreInformation"
 import { CategoryCard } from "../../Components/Category-Card"
 import { ProductCard } from "../../Components/Product-Card"
+import { ShowMoreButton } from "../../Components/ShowMoreButton"
 
 import axios from "axios"
 
@@ -52,7 +50,6 @@ export const Home = () => {
     // state products  
     const [products, setProducts] = useState<ProductProps[]>([])
 
-
     return (
         <main>
             {/* Banner */}
@@ -83,10 +80,14 @@ export const Home = () => {
                 <section className="container__products">
                     {products.map(product => (
                         <ProductCard
+                            key={product.id}
                             product={product}
                         />
                     ))}
                 </section>
+
+                {/* Show More Button */}
+                <ShowMoreButton products={products} setProducts={setProducts}/>
             </section>
 
             <StoreInformation/>

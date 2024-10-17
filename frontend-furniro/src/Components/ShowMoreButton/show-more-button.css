@@ -1,0 +1,11 @@
+:root{
+    --border-and-font-color:#B88E2F;
+}
+
+.show__more_btn{
+    background-color: transparent;
+    height: 48px;
+    width: 245px;
+    border: 1px solid var(--border-and-font-color);
+    color: var(--border-and-font-color);
+}
