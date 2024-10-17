@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Components
 import { Header } from "../Components/Header";
 import { Home } from "../Pages/Home";
+import { Shop } from "../Pages/Shop";
 import { Footer } from "../Components/Footer";
 
 export const RoutePagination = () => {
@@ -14,6 +15,7 @@ export const RoutePagination = () => {
 
             <Routes>
                 <Route path="/" element={<Home/>}/>
+                <Route path="/shop/:category?" element={<Shop/>}/>
             </Routes>
             
             {/* Footer */}
