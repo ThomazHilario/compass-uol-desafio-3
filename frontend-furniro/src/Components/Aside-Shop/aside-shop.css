@@ -1,0 +1,119 @@
+:root{
+    --color-inputs-form:#9F9F9F;
+}
+
+aside{
+    background-color: #F9F1E7;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    padding: 1rem;
+
+    /* Content aside */
+    #content-aside{
+        width: 83vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        /* Section Product list items*/
+        #product__list__items{
+            display: flex;
+
+            ul{
+                display: none;
+                gap: 1.5rem;
+
+                li{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.7rem;
+                }
+
+                @media screen and (min-width:768px){
+                    display: flex;
+                }
+            }
+
+            /* Pipe */
+            #pipe{
+                display: none;
+                height: 24px;
+                width: 2px;
+                background-color: #9F9F9F;
+
+                @media screen and (min-width:768px){
+                    display: block;
+                }
+            }
+
+            @media screen and (min-width:768px){
+            gap: 1.5rem;
+            }
+        }
+
+        /* Filter values */
+        form{
+            display: flex;
+            flex-direction: column-reverse;
+            flex-wrap: wrap;
+            width: 100%;
+            gap:1.6rem;
+
+            div{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 1rem;
+                font-size: 1.1rem;
+
+                /* Reset input filter */
+                input{
+                    outline: none;
+                    border: 0;
+                    text-align: center;
+                }
+
+                /* Input show */
+                &:nth-child(1){
+                    input{
+                        color: var(--color-inputs-form);
+                        font-size: 1.1rem;
+                        height: 55px;
+                        width: 55px;
+                    }
+                }
+
+                /* Input short by */
+                &:nth-child(2){
+                    select{
+                        color: var(--color-inputs-form);
+                        font-size: 1.1rem;
+                        text-align: center;
+                        border: 0;
+                        height: 55px;
+                        width: 188px;
+                    }
+                }
+
+                @media screen and (min-width:768px){
+                    flex-direction: row;
+                }
+            }
+
+            @media screen and (min-width:768px){
+                flex-direction: row;
+                width: auto;
+            }
+        }
+
+        @media screen and (min-width:1024px){
+            justify-content: space-between;
+        }
+    }
+}
