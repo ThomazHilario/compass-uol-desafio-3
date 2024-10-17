@@ -1,14 +1,19 @@
 :root{
+    /* Card */
     --card-old-price-color:#B0B0B0;
     --card-product-color:#F4F5F7;
     --title-product-card-color:#3A3A3A;
     --subtitle-product-card-color:#898989;
     --text-tag-product-card-color:#FFFFFF;
+
+    /* More information */
+    --more-information-card-color:#00000062;
+    --text-see-details-color:#B88E2F;
 }
 
 /* Animation hover */
 @keyframes hoverAnimation {
-    0%{height: 50px;}
+    0%{ height: 5%;}
 }
 
 
@@ -18,11 +23,62 @@
     width:285px ;
     height: 446px;
 
+    /* Card hover css */
     &:hover{
         .moreInformation{
-            display: block;
+            display: flex;
         }
     }
+
+    /* More information hover card */
+    .moreInformation{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.5rem;
+        align-items: center;
+        position: relative;
+        top: -100%;
+        height: 446px;
+        background-color: var(--more-information-card-color);
+        animation-name: hoverAnimation;
+        animation-duration: 0.4s;
+
+        /* Button navigation */
+        a{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+            height: 48px;
+            width: 202px;
+            background-color: #FFFFFF;
+            color: var(--text-see-details-color);
+        }
+
+        /* Actions for products */
+        .actions__for__product{
+            width: 100%;
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+
+            li{
+                display: flex;
+                align-items:center;
+                gap: 0.2rem;
+                color: white;
+                cursor: pointer;
+
+                h6{
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    /* ------------------------------------------- */
 
     /* Image product */
     img{
@@ -30,6 +86,7 @@
         height: 301px;
     }
 
+    /* Product informations */
     article{
         padding: 1rem 1.2rem;
         display: flex;
@@ -66,6 +123,7 @@
             font-weight: 500;
         }
 
+        /* Price details */
         section{
 
             /* Current price css */
@@ -91,13 +149,4 @@
         }
     }
 
-    .moreInformation{
-        display: none;
-        position: relative;
-        top: -100%;
-        height: 446px;
-        background-color: rgba(0, 0, 0, 0.384);
-        animation-name: hoverAnimation;
-        animation-duration: 0.5s;
-    }
 }

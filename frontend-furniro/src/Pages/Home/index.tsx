@@ -1,6 +1,9 @@
 // React
 import { useState, useEffect } from "react"
 
+// React Router Dom
+import { Link } from "react-router-dom"
+
 //Interfaces
 import { CategoryProps } from "../../Interfaces/category-type"
 import { ProductProps } from "../../Interfaces/product-type"
