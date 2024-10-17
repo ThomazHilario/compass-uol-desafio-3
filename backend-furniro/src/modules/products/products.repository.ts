@@ -32,12 +32,40 @@ export class ProductsRepository{
     }
 
     // Seach all products in Database
-    async seachProducts(){
+    async seachProducts(limit?:number, isNew?:boolean, isDiscount?:boolean){
         // Seach all products
         const products = await this.prisma.product.findMany()
 
         // length products big for zero
         if(products.length > 0){
+            // if you have a limit
+            if(limit){
+
+                // Return products new and with discount
+                if(isNew && isDiscount){
+                    return products.filter(product => product.discount_percent > 0 || product.is_new === isNew).slice(0, limit)
+                }
+
+                // Return new products with limit
+                if(isNew){
+                    return products.filter(product => product.is_new === isNew).slice(0, limit)
+                }
+
+                // Return products with limit
+                return products.slice(0, limit)
+            }
+
+            // Return new products
+            if(isNew){
+                return products.filter(product => product.is_new === isNew)
+            }
+
+            // Return new products with discount
+            if(isNew && isDiscount){
+                return products.filter(product => product.discount_percent > 0 && product.is_new === isNew)
+            }
+
+            // Return products
             return products
         } else {
             return 'Does not exist products'

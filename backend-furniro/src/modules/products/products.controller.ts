@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductSchema } from './dtos/product.dto';
+import { QueryDto } from './dtos/query.dto';
 import { UpdateProductDto } from './dtos/updateProduct.dto';
 
 @Controller('products')
@@ -9,9 +10,13 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  async readingProduct(){
-    // Seach for products in database
-    return await this.productsService.seachProducts()
+  async readingProduct(@Query() query:QueryDto){
+
+    // Seach for products in database with params or no
+    const products = await this.productsService.seachProducts(Number(query.limit),Boolean(query.isNew), Boolean(query.isDiscount))
+
+    // Return product for limit
+    return products
   }
 
   @Get('/:id')

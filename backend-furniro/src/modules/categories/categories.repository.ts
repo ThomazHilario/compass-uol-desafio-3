@@ -7,7 +7,10 @@ export class CategoriesRepository{
 
     // Reading Categories
     async readCategories(){
-        return await this.prisma.category.findMany()
+        const categories = await this.prisma.category.findMany()
+
+        // Return categories in sequency
+        return categories.sort((a, b) => a.id - b.id)
     }
 
     // Reading unique Category
