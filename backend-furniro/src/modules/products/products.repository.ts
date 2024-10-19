@@ -32,7 +32,7 @@ export class ProductsRepository{
     }
 
     // Seach all products in Database
-    async seachProducts(limit?:number, isNew?:boolean, isDiscount?:boolean){
+    async seachProducts(page?:number, limit?:number, isNew?:boolean, isDiscount?:boolean){
         // Seach all products
         const products = await this.prisma.product.findMany()
 
@@ -49,6 +49,22 @@ export class ProductsRepository{
                 // Return new products with limit
                 if(isNew){
                     return products.filter(product => product.is_new === isNew).slice(0, limit)
+                }
+
+                // Return Products per page with limits
+                if(page){
+                    // Calc initial and end value per page
+                    const initialQuantity = (page - 1) * limit
+                    const endQuantity = initialQuantity + limit
+
+                    // Find products in quantity specified
+                    const productsPerPage = products.slice(initialQuantity, endQuantity)
+
+                    // Return products
+                    return ({
+                        productsPerPage:productsPerPage.length > 0 ? productsPerPage : 'Não possui mais produtos',
+                        totalPages: Math.ceil(products.length / limit)
+                    })
                 }
 
                 // Return products with limit

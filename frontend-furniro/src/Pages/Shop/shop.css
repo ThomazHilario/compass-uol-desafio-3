@@ -1,7 +1,10 @@
 #list__products{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: 4rem 0;
+    align-items: center;
+    gap: 4rem;
+    margin: 4rem 2rem;
 
     /* Container products */
     .container__products{

@@ -1,0 +1,29 @@
+.navigation__per__page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    button{
+        background-color: #F9F1E7;
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+
+        /* First and last button */
+        &:first-child, &:last-child{
+            width: 98px;
+        }
+
+        /* All Buttos except the last */
+        &:not(:last-child){
+            display: none;
+        }
+
+        @media screen and (min-width:768px){
+            &:not(:first-child, :last-child){
+                display: block;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import { IsOptional, IsNumberString, IsBooleanString } from "class-validator";
 
-export class QueryDto{
+export class FindSpecifiedProductsDto{
     @IsNumberString()
     @IsOptional()
     limit?:string
@@ -12,4 +12,8 @@ export class QueryDto{
     @IsBooleanString()
     @IsOptional()
     isDiscount?:string
+
+    @IsNumberString()
+    @IsOptional()
+    page?:string
 }

@@ -15,7 +15,7 @@ export const RoutePagination = () => {
 
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/shop/:category?" element={<Shop/>}/>
+                <Route path="/shop/:category?/:id?" element={<Shop/>}/>
             </Routes>
             
             {/* Footer */}

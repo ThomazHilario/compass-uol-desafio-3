@@ -14,7 +14,7 @@ import './category-card.css'
 
 export const CategoryCard = ({ category }:CategoryCardProps) => {
     return(
-        <Link to={`/shop/${category.id}`} className="category__card" key={category.id}>
+        <Link to={`/shop/${category.name}/${category.id}`} className="category__card" key={category.id}>
             <img src={category.image_link} alt={category.name}/>
             <h3>{category.name}</h3>
         </Link>

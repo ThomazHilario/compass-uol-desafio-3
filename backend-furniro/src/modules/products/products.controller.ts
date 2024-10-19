@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductSchema } from './dtos/product.dto';
-import { QueryDto } from './dtos/query.dto';
+import { FindSpecifiedProductsDto } from './dtos/find-specified'
 import { UpdateProductDto } from './dtos/updateProduct.dto';
 
 @Controller('products')
@@ -10,10 +10,10 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  async readingProduct(@Query() query:QueryDto){
+  async readingProduct(@Query() query:FindSpecifiedProductsDto){
 
     // Seach for products in database with params or no
-    const products = await this.productsService.seachProducts(Number(query.limit),Boolean(query.isNew), Boolean(query.isDiscount))
+    const products = await this.productsService.seachProducts(Number(query.page), Number(query.limit),Boolean(query.isNew), Boolean(query.isDiscount))
 
     // Return product for limit
     return products

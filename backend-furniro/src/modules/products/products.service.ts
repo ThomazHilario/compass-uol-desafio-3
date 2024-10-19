@@ -14,8 +14,8 @@ export class ProductsService {
     }
 
     // Seach all products in Database
-    async seachProducts(limit?:number, isNew?:boolean, isDiscount?:boolean){
-        return this.productsRepository.seachProducts(limit, isNew, isDiscount)
+    async seachProducts(page?:number, limit?:number, isNew?:boolean, isDiscount?:boolean){
+        return this.productsRepository.seachProducts(page, limit, isNew, isDiscount)
     }
 
     // Seach one product for id in Database
@@ -23,8 +23,8 @@ export class ProductsService {
         return this.productsRepository.seachOneProduct(id)
     }
 
-     // Update one product
-     async updateProduct(id:number, data:UpdateProductDto){
+    // Update one product
+    async updateProduct(id:number, data:UpdateProductDto){
         await this.productsRepository.updateProduct(id, data)
     }
 }
