@@ -60,7 +60,7 @@ export const ProductCard = ({ product }:{product:ProductProps}) => {
 
             {/* More information for product */}
             <section className="moreInformation">
-                <Link to={`/productDetails/${product.id}`}>See Details</Link>
+                <Link to={`/product/${product.id}`}>See Details</Link>
 
                 <ul className="actions__for__product">
                     <li>

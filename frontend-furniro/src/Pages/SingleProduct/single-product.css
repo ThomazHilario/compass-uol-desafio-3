@@ -1,0 +1,174 @@
+:root{
+    --color-price-:#9F9F9F
+}
+
+#container__aside__product{
+    width: 83vw;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+
+    li{
+        display: contents;
+
+        &:not(:last-child, :nth-child(3))::after{
+            content: url('data:image/svg+xml;utf8,<svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 12L5 7L0 2L1 0L8 7L1 14L0 12Z" fill="black"/></svg>');
+        }
+
+        &:last-child::before{
+            content: url('data:image/svg+xml;utf8,<svg width="2" height="37" viewBox="0 0 2 37" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="1" x2="1" y2="37" stroke="%239F9F9F" stroke-width="2"/></svg>');
+        }
+    }
+}
+
+#container__product{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    #images__to__product{
+        display: flex;
+        gap: 2rem;
+
+        /* All images in image to product */
+        img{
+            cursor: pointer;
+        }
+
+        /* Other image products section */
+        #others__image__products{
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            /* Others images css */
+            img{
+                height: 76px;
+                width: 80px;
+                border-radius: 10px;
+            }
+        }
+
+        /* Principal__image */
+        #main__image{
+            max-width: 423px;
+            max-height: 500px;
+            border-radius: 10px;
+        }
+    }
+
+    #details__to__product{
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+
+        /* Reset h4 for page product */
+        h4{
+            color: var(--color-price-);
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        /* Container button */
+        .container__button{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            div{
+                display: flex;
+                gap: 1rem;
+
+                button{
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        }
+
+        /* Title */
+        h2{
+            font-size: 3.5rem;
+            font-weight: 400;
+        }
+
+        /* Price to product */
+        h3{
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-price-);
+        }
+        
+        /* Available product */
+        #available__product{
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            #rating{
+                svg{
+                    &:first-child{
+                        margin-right: 6px;
+                    }
+    
+                    &:not(:first-child){
+                        margin: 0 6px;
+                    }
+                }
+            }
+
+            p{
+                color: var(--color-price-);
+                font-size: 13px;
+            }
+        }
+
+        /* Description */
+        #description{
+            max-width: 420px;
+            font-size: 13px;
+            text-align: justify;
+        }
+
+        /* section Size product css */
+        #size__product{
+            div > button{
+                border-radius: 5px;
+            }
+        }
+
+        /* section Color product css */
+        #color__product{
+            div > button{
+                border-radius: 100%;
+
+                &:nth-child(1){
+                    background-color: #816DFA;
+                }
+
+                &:nth-child(2){
+                    background-color: #000000;
+                }
+                &:nth-child(3){
+                    background-color: #B88E2F;
+                }
+            }
+        }
+
+        #add__product__to__cart{
+            margin-top: 1rem;
+            display: flex;
+            gap: 1.1rem;
+
+            button{
+                &:not(:first-child){
+                    width: 215px;
+                    height: 64px;
+                    border: 1px solid black;
+                    border-radius: 15px;
+                    background-color: white;
+                }
+            }
+        }
+    }
+}
