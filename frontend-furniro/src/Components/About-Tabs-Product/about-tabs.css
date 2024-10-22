@@ -1,3 +1,7 @@
+:root{
+    --primary-color-about-tabs: #9F9F9F;
+}
+
 #about__product{
     display: flex;
     flex-direction: column;
@@ -16,7 +20,7 @@
             background-color: transparent;
 
             &:last-child{
-                color: #9F9F9F;
+                color: var(--primary-color-about-tabs);
             }
         }
 
@@ -31,8 +35,10 @@
 
         /* Paragraph */
         p{
+            font-weight: 400;
             text-align: justify;
             margin: 1.7rem 0;
+            color: var(--primary-color-about-tabs);
         }
 
         /* Last article */
