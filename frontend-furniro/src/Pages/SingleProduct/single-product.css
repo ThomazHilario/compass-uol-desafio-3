@@ -7,9 +7,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     overflow: hidden;
 
+    /* Horizontal line */
+    .horizontal__line{
+        width: 100%;
+        border: 1px solid #D9D9D9;
+    }
+
+    /* Product information */
     #container__product__information{
         display: flex;
         flex-wrap: wrap;
@@ -191,6 +198,7 @@
     
             /* Product informations */
             #product__information{
+                margin-top: 1.5rem;
                 ul{
                     li{
                         color: var(--color-price-);
@@ -252,6 +260,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 2rem  0 4rem 0;
 
         /* Title section */
         h2{

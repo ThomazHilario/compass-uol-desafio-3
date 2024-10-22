@@ -199,6 +199,9 @@ export const SingleProduct = () => {
                     </article>
                 </article>
             </section>
+            
+            {/* Horizontal line */}
+            <hr className="horizontal__line" />
 
             {/* About tabs product component */}
             <AboutTabsProduct 
@@ -221,6 +224,9 @@ export const SingleProduct = () => {
                     category_id={category?.id}
                 />
             </section>
+
+            {/* Horizontal line */}
+            <hr className="horizontal__line" />
         </main>
     )
 }
