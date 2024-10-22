@@ -1,0 +1,43 @@
+#about__product{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+
+    /* Triggers */
+    #about__triggers{
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+
+        button{
+            font-size: 1.5rem;
+            background-color: transparent;
+
+            &:last-child{
+                color: #9F9F9F;
+            }
+        }
+
+        @media screen and (min-width:768px){
+            gap: 3.5rem;
+        }
+    }
+
+    /* Contents */
+    .about__content{
+        width: 83vw;
+
+        /* Paragraph */
+        p{
+            text-align: justify;
+            margin: 1.7rem 0;
+        }
+
+        /* Last article */
+        &:last-child{
+            display: none;
+        }
+    }
+}
