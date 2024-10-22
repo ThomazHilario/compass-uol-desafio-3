@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    overflow: hidden;
 }
 
 #container__product{
@@ -19,6 +20,7 @@
     #images__to__product{
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 2rem;
 
         /* All images in image to product */
@@ -29,7 +31,10 @@
         /* Other image products section */
         #others__image__products{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            overflow-x: scroll;
+            width: 90vw;
+            height: 100%;
             gap: 1.5rem;
 
             /* Others images css */
@@ -38,18 +43,26 @@
                 width: 80px;
                 border-radius: 10px;
             }
+
+            @media screen and (min-width:768px){
+                flex-direction: column;
+                width: auto;
+                height: auto;
+                overflow-x: auto;
+            }
         }
 
-        /* Principal__image */
+        /* main image */
         #main__image{
-            width: 100%;
+            width: 90vw;
             height: 100%;
             border-radius: 10px;
             object-fit: cover;
 
             @media screen and (min-width:768px){
-                width: 623px;
+                width: 70vw;
                 height: 500px;
+                object-fit: fill;
             }
 
             @media screen and (min-width:1400px){
@@ -58,8 +71,9 @@
             }
         }
 
-        @media screen and (min-width:1400px){
+        @media screen and (min-width:768px){
             flex-direction: row;
+            align-items: start;
         }
     }
 
