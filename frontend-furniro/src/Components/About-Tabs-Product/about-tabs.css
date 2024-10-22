@@ -1,0 +1,49 @@
+:root{
+    --primary-color-about-tabs: #9F9F9F;
+}
+
+#about__product{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+
+    /* Triggers */
+    #about__triggers{
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+
+        button{
+            font-size: 1.5rem;
+            background-color: transparent;
+
+            &:last-child{
+                color: var(--primary-color-about-tabs);
+            }
+        }
+
+        @media screen and (min-width:768px){
+            gap: 3.5rem;
+        }
+    }
+
+    /* Contents */
+    .about__content{
+        width: 83vw;
+
+        /* Paragraph */
+        p{
+            font-weight: 400;
+            text-align: justify;
+            margin: 1.7rem 0;
+            color: var(--primary-color-about-tabs);
+        }
+
+        /* Last article */
+        &:last-child{
+            display: none;
+        }
+    }
+}
