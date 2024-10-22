@@ -14,6 +14,7 @@ import { AsideProduct } from "../../Components/Aside-Product"
 import { SizeProduct } from "../../Components/Size-Product"
 import { AddingProduct } from "../../Components/Adding-Product"
 import { AboutTabsProduct } from "../../Components/About-Tabs-Product"
+import { ProductCard } from "../../Components/Product-Card"
 
 // css import
 import './single-product.css'
@@ -24,6 +25,7 @@ export const SingleProduct = () => {
     const { id } = useParams()
 
     useEffect(() => {
+
         // Find specified product
         async function findSpecifiedProduct(){
             try {
@@ -34,10 +36,19 @@ export const SingleProduct = () => {
                 const product = await productFounded.json()
                 const categories = await categoriesFounded.json()
 
-                // Set data in state product in state categories
+                // Find Category id
+                const categoryId = categories.find((category:CategoryProps) => category.id === product.category_id).id
+                
+                // Request products related
+                const responseProductsRelated = await fetch(`http://localhost:3000/products?limit=4&category_id${categoryId}`)
+
+                // Parsing data productsRelated
+                const productsRelated = await responseProductsRelated.json()
+
+                // Set data in state product and categories 
                 setProduct(product)
                 setCategories(categories)
-
+                setProductsRelated(productsRelated)
             } catch (error) {
                 console.log(error)
             }
@@ -49,7 +60,7 @@ export const SingleProduct = () => {
     }, [id])
 
     // state - Products
-    const [products, setProducts] = useState<ProductProps[]>([])
+    const [productsRelated, setProductsRelated] = useState<ProductProps[]>([])
 
     // state - product
     const [product, setProduct] = useState<ProductProps>()
@@ -57,8 +68,8 @@ export const SingleProduct = () => {
     // state - categories
     const [categories, setCategories] = useState<CategoryProps[]>([])
 
-    // category name
-    const categoryName = categories.find(category => category.id === product?.category_id)?.name
+    // Product category
+    const category = categories.find(category => category.id === product?.category_id)
 
     // format price in BRL
     function formatPrice(price:number, discount_price:number){
@@ -83,7 +94,7 @@ export const SingleProduct = () => {
             {/* Aside product */}
             <AsideProduct product={product as ProductProps}/>
 
-            <section id="container__product">
+            <section id="container__product__information">
                 <section id="images__to__product">
                     <section id="others__image__products">
                         {product?.other_images_link.map((image, idx) => (
@@ -165,8 +176,8 @@ export const SingleProduct = () => {
                     <article id="product__information">
                         <ul>
                             <li><h5>SKU</h5> <span>{product?.sku}</span></li>
-                            <li><h5>Category</h5> <span>{categoryName}</span></li>
-                            <li><h5>Tags</h5> <span>{categoryName}, Chair, Home, Shop</span></li>
+                            <li><h5>Category</h5> <span>{category?.name}</span></li>
+                            <li><h5>Tags</h5> <span>{category?.name}, Chair, Home, Shop</span></li>
                             <li>
                                 <h5>Share</h5> 
                                 
@@ -198,7 +209,17 @@ export const SingleProduct = () => {
             <section id="related__products">
                 <h2>Related Products</h2>
 
-                <ShowMoreButton products={products} setProducts={setProducts}/>
+                <section id="container__products">
+                    {productsRelated.map(product => (
+                        <ProductCard key={product.id} product={product}/>
+                    ))}
+                </section>
+
+                <ShowMoreButton 
+                    products={productsRelated} 
+                    setProducts={setProductsRelated}
+                    category_id={category?.id}
+                />
             </section>
         </main>
     )

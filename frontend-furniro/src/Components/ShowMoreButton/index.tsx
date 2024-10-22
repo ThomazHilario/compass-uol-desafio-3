@@ -7,13 +7,14 @@ import { ProductProps } from "../../Interfaces/product-type"
 // Interface ShowMoreButtonProps
 interface ShowMoreButtonProps{
     products:ProductProps[];
-    setProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>
+    setProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>,
+    category_id?: number;
 }
 
 // css import
 import './show-more-button.css'
 
-export const ShowMoreButton = ({products, setProducts}:ShowMoreButtonProps) => {
+export const ShowMoreButton = ({products, setProducts, category_id}:ShowMoreButtonProps) => {
     // usenavigate - react router dom
     const navigate = useNavigate()
 
@@ -21,7 +22,7 @@ export const ShowMoreButton = ({products, setProducts}:ShowMoreButtonProps) => {
     async function requestProducts(){
         try {
             // Making request
-            const response = await fetch('http://localhost:3000/products?limit=8')
+            const response = await fetch(`http://localhost:3000/products?limit=8&category_id=${category_id}`)
 
             // Processing data
             const products = await response.json()
@@ -37,7 +38,7 @@ export const ShowMoreButton = ({products, setProducts}:ShowMoreButtonProps) => {
     const moreAction = () => {
         
         // verify lenght in products
-        if(products.length === 8){
+        if(products.length >= 8){
             navigate('/shop')
         }else{
             // Exec requestProducts

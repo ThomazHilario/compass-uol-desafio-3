@@ -16,4 +16,8 @@ export class FindSpecifiedProductsDto{
     @IsNumberString()
     @IsOptional()
     page?:string
+
+    @IsNumberString()
+    @IsOptional()
+    category_id?:string
 }
