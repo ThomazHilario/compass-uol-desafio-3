@@ -1,0 +1,12 @@
+#size__product{
+    div > button{
+        border-radius: 5px;
+        background-color: var(--color-button-size);
+        outline: none;
+
+        &:focus{
+            background-color: #B88E2F;
+            color: white;
+        }
+    }
+}
