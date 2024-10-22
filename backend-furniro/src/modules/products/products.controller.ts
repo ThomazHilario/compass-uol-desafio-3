@@ -13,7 +13,7 @@ export class ProductsController {
   async readingProduct(@Query() query:FindSpecifiedProductsDto){
 
     // Seach for products in database with params or no
-    const products = await this.productsService.seachProducts(Number(query.page), Number(query.limit),Boolean(query.isNew), Boolean(query.isDiscount))
+    const products = await this.productsService.seachProducts(Number(query.page), Number(query.limit),Boolean(query.isNew), Boolean(query.isDiscount), Number(query.category_id))
 
     // Return product for limit
     return products
