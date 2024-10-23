@@ -11,6 +11,9 @@ interface ShowMoreButtonProps{
     category_id?: number;
 }
 
+// Axios
+import axios from "axios";
+
 // css import
 import './show-more-button.css'
 
@@ -22,13 +25,10 @@ export const ShowMoreButton = ({products, setProducts, category_id}:ShowMoreButt
     async function requestProducts(){
         try {
             // Making request
-            const response = await fetch(`http://localhost:3000/products?limit=8&category_id=${category_id}`)
-
-            // Processing data
-            const products = await response.json()
+            const products = await axios.get(`http://localhost:3000/products?limit=8&category_id=${category_id}`)
 
             // Change state products
-            setProducts(products)
+            setProducts(products.data)
         } catch (error) {
             console.log(error)
         }

@@ -16,6 +16,9 @@ import { AddingProduct } from "../../Components/Adding-Product"
 import { AboutTabsProduct } from "../../Components/About-Tabs-Product"
 import { ProductCard } from "../../Components/Product-Card"
 
+// Axios
+import axios from "axios"
+
 // css import
 import './single-product.css'
 
@@ -30,25 +33,21 @@ export const SingleProduct = () => {
         async function findSpecifiedProduct(){
             try {
                 // Making request
-                const [productFounded, categoriesFounded] = await Promise.all([await fetch(`http://localhost:3000/products/${id}`), await fetch('http://localhost:3000/categories')])
-
-                // Parsing data
-                const product = await productFounded.json()
-                const categories = await categoriesFounded.json()
+                const [productFounded, categoriesFounded] = await Promise.all([
+                    axios.get(`http://localhost:3000/products/${id}`), 
+                    axios.get('http://localhost:3000/categories')
+                ])
 
                 // Find Category id
-                const categoryId = categories.find((category:CategoryProps) => category.id === product.category_id).id
+                const categoryId = categoriesFounded.data.find((category:CategoryProps) => category.id === productFounded.data.category_id).id
                 
                 // Request products related
-                const responseProductsRelated = await fetch(`http://localhost:3000/products?limit=4&category_id${categoryId}`)
+                const productsRelated = await axios.get(`http://localhost:3000/products?limit=4&category_id${categoryId}`)
 
-                // Parsing data productsRelated
-                const productsRelated = await responseProductsRelated.json()
-
-                // Set data in state product and categories 
-                setProduct(product)
-                setCategories(categories)
-                setProductsRelated(productsRelated)
+                // Set data in state product, categories and products related
+                setProduct(productFounded.data)
+                setCategories(categoriesFounded.data)
+                setProductsRelated(productsRelated.data)
             } catch (error) {
                 console.log(error)
             }

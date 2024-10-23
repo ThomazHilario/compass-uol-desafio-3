@@ -12,6 +12,7 @@ import { CategoryCard } from "../../Components/Category-Card"
 import { ProductCard } from "../../Components/Product-Card"
 import { ShowMoreButton } from "../../Components/ShowMoreButton"
 
+// Axios
 import axios from "axios"
 
 // css import
@@ -24,13 +25,11 @@ export const Home = () => {
         // getCategories in database
         async function requestProductsAndCategories() {
             try {
-                const [products, categories] = await Promise.all([axios.get('http://localhost:3000/products', {
-                    params:{
-                        isNew:true,
-                        isDiscount:true,
-                        limit:8
-                    }
-                }), axios.get('http://localhost:3000/categories')])
+                // Making Request
+                const [products, categories] = await Promise.all([
+                    axios.get('http://localhost:3000/products?limit=8&isDiscount=true&isNew=true'), 
+                    axios.get('http://localhost:3000/categories')
+                ])
 
                 // Change state Products and Categories 
                 setProducts(products.data)

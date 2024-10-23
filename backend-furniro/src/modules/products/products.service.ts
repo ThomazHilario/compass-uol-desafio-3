@@ -14,8 +14,8 @@ export class ProductsService {
     }
 
     // Seach all products in Database
-    async seachProducts(page?:number, limit?:number, isNew?:boolean, isDiscount?:boolean, categoryId?:number){
-        return this.productsRepository.seachProducts(page, limit, isNew, isDiscount, categoryId)
+    async seachProducts(page?:number, limit?:number, isNew?:boolean, isDiscount?:boolean, categoryId?:number, orderBy?:string){
+        return this.productsRepository.seachProducts(page, limit, isNew, isDiscount, categoryId, orderBy)
     }
 
     // Seach one product for id in Database
