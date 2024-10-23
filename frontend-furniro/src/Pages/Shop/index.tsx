@@ -17,6 +17,9 @@ import { ProductCard } from '../../Components/Product-Card'
 import { ProductPagination } from '../../Components/Product-Pagination'
 import { StoreInformation } from '../../Components/StoreInformation'
 
+// Axios
+import axios from 'axios'
+
 // css import 
 import './shop.css'
 
@@ -32,27 +35,30 @@ export const Shop = () => {
     const [stepPage, setStepPage] = useState<number>(1)
 
     useEffect(() => {
-        async function getProducts(){
+        // Find Products in Database
+        async function findProductsInDatabase(){
             try {
                 // Making request
-                const response = await fetch(`http://localhost:3000/products?limit=32&page=${stepPage}`)
-
-                // Processing data
-                const products = await response.json()
+                const products = await axios.get(`http://localhost:3000/products`, {
+                    params:{
+                        limit:32,
+                        page:stepPage,
+                    }
+                })           
 
                 // Change state products
-                setProducts(products.productsPerPage)
+                setProducts(products.data.productsPerPage)
 
                 // Change state totalPagesNavigation
-                setTotalPagesNavigation(Array.from({length:products.totalPages}, (_, i) => i + 1))
+                setTotalPagesNavigation(Array.from({length:products.data.totalPages}, (_, i) => i + 1))
 
             } catch (error) {
                 console.log(error)
             }
         }
 
-        // Exec getProducts
-        getProducts()
+        // Exec findProductsInDatabase
+        findProductsInDatabase()
     },[stepPage])
 
     // state - products
