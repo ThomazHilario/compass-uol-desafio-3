@@ -1,4 +1,4 @@
-import { IsOptional, IsNumberString, IsBooleanString } from "class-validator";
+import { IsOptional, IsNumberString, IsBooleanString, IsString } from "class-validator";
 
 export class FindSpecifiedProductsDto{
     @IsNumberString()
@@ -20,4 +20,8 @@ export class FindSpecifiedProductsDto{
     @IsNumberString()
     @IsOptional()
     category_id?:string
+
+    @IsString()
+    @IsOptional()
+    orderBy?:string
 }

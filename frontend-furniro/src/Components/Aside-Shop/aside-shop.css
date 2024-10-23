@@ -32,6 +32,24 @@ aside{
                     justify-content: center;
                     align-items: center;
                     gap: 0.7rem;
+
+                    /* Trigger */
+                    button{
+                        display: flex;
+                        align-items: center;
+                        gap: 0.7rem;
+                        background-color: transparent;
+
+                    }
+
+                    /* Content */
+                    .content__filter{
+                        position: absolute;
+                        display: none;
+                        z-index: 1;
+                        border: 0;
+                    }
+
                 }
 
                 @media screen and (min-width:768px){
@@ -98,6 +116,7 @@ aside{
                         border: 0;
                         height: 55px;
                         width: 188px;
+                        outline: none;
                     }
                 }
 

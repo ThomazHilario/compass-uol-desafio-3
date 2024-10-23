@@ -32,10 +32,17 @@ export class ProductsRepository{
     }
 
     // Seach all products in Database
-    async seachProducts(page?:number, limit?:number, isNew?:boolean, isDiscount?:boolean, categoryId?:number){
+    async seachProducts(page?:number, limit?:number, isNew?:boolean, isDiscount?:boolean, categoryId?:number, orderBy?:string){
         // Seach all products
         const products = await this.prisma.product.findMany()
 
+        // Types sort for products
+        const sortTypes = {
+            'default':(array:ProductSchema[]) => array,
+            'cres':(array:ProductSchema[]) => array.sort((a, b) => a.price - b.price),
+            'desc':(array:ProductSchema[]) => array.sort((a, b) => b.price - a.price), 
+        }
+    
         // length products big for zero
         if(products.length > 0){
             // if you have a limit
@@ -60,6 +67,14 @@ export class ProductsRepository{
                     // Find products in quantity specified
                     const productsPerPage = products.slice(initialQuantity, endQuantity)
 
+                    // Case have orderBy
+                    if(orderBy){
+                        return ({
+                            productsPerPage:productsPerPage.length > 0 ? sortTypes[orderBy](productsPerPage) : 'Não possui mais produtos',
+                            totalPages: Math.ceil(products.length / limit)
+                        })
+                    }
+
                     // Return products
                     return ({
                         productsPerPage:productsPerPage.length > 0 ? productsPerPage : 'Não possui mais produtos',
@@ -69,6 +84,10 @@ export class ProductsRepository{
 
                 if(categoryId){
                     return products.filter(product => product.category_id === categoryId).slice(0, limit)
+                }
+
+                if(orderBy){
+                    return sortTypes[orderBy](products).slice(0, limit)
                 }
 
                 // Return products with limit

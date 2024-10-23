@@ -1,14 +1,18 @@
+// Store
+import { shopStore } from '../../Store/store'
+
 // css import
 import './productPagination.css'
 
 // Interface
 interface ProductPaginationProps{
-    stepPage: number,
-    setStepPage: React.Dispatch<React.SetStateAction<number>>,
     totalPagesNavigation:number[]
 }
 
-export const ProductPagination = ({stepPage, setStepPage, totalPagesNavigation}:ProductPaginationProps) => {
+export const ProductPagination = ({totalPagesNavigation}:ProductPaginationProps) => {
+
+    // Navigation page - state from store
+    const { stepPage, setStepPage } = shopStore(state => state)
 
     // Logic to enable or disable display
     const andFor = {

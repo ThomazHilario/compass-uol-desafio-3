@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 // Store
-import { filterStore } from '../../Store/store'
+import { shopStore } from '../../Store/store'
 
 // Interface
 import { ProductProps } from '../../Interfaces/product-type'
@@ -28,11 +28,8 @@ export const Shop = () => {
     // Params
     const { id } = useParams()
 
-    // Store - showQuantity
-    const { showQuantity } = filterStore(state => state)
-
-    // state - stepPage
-    const [stepPage, setStepPage] = useState<number>(1)
+    // Store
+    const { showQuantity, shortBy, stepPage } = shopStore(state => state)
 
     useEffect(() => {
         // Find Products in Database
@@ -41,8 +38,9 @@ export const Shop = () => {
                 // Making request
                 const products = await axios.get(`http://localhost:3000/products`, {
                     params:{
-                        limit:32,
+                        limit:!id && Number(showQuantity) >= 16 ? showQuantity : 32,
                         page:stepPage,
+                        orderBy:shortBy
                     }
                 })           
 
@@ -59,7 +57,7 @@ export const Shop = () => {
 
         // Exec findProductsInDatabase
         findProductsInDatabase()
-    },[stepPage])
+    },[stepPage, showQuantity, id, shortBy])
 
     // state - products
     const [products, setProducts] = useState<ProductProps[]>([])
@@ -68,7 +66,7 @@ export const Shop = () => {
     const [totalPagesNavigation, setTotalPagesNavigation] = useState<number[]>([])
 
     // Filter products with limit or with limit and category
-    const productsInLimit:ProductProps[] = !id ? products.slice(0, showQuantity as number) : products.filter(product => product.category_id === Number(id)).slice(0, showQuantity as number)
+    const productsInLimit:ProductProps[] = !id ? products : products.filter(product => product.category_id === Number(id))
 
     return(
         <main>
@@ -76,7 +74,7 @@ export const Shop = () => {
             <BannerShop/>
 
             {/* Aside in page shop */}
-            <AsideShop/>
+            <AsideShop />
 
             {/* Section for products */}
             <section id='list__products'>
@@ -88,13 +86,7 @@ export const Shop = () => {
                 </section>
 
                 {/* Pagination products */}
-                {!id && (
-                    <ProductPagination 
-                        stepPage={stepPage} 
-                        setStepPage={setStepPage} 
-                        totalPagesNavigation={totalPagesNavigation}
-                    />
-                )}
+                {!id && <ProductPagination totalPagesNavigation={totalPagesNavigation} />}
             </section>
 
            {/* Store informatios */}

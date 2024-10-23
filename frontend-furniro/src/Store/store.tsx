@@ -1,16 +1,38 @@
 // Import zustand
 import { create } from "zustand";
 
-// Interface Filter Store 
-interface FilterStoreProps{
+// Interface
+interface ShopStoreProps{
     showQuantity:number | string;
-    setShowQuantity: (newQuant:number | string) => void
+    setShowQuantity: (newQuant:number | string) => void;
+    shortBy:string;
+    setShortBy:(newShortByValue:string) => void;
+    stepPage:number;
+    setStepPage:(newStep:number) => void
 }
 
-export const filterStore = create<FilterStoreProps>((set) => ({
-    showQuantity:16,
+// Filter store states
+export const shopStore = create<ShopStoreProps>((set) => ({
+    // ------- Filter products ------- //
 
+    // Show quantity
+    showQuantity:16,
     setShowQuantity: (newQuantity:number | string) => set(() => ({
         showQuantity: newQuantity
+    })),
+
+    // Short By
+    shortBy:'default',
+    setShortBy: (newShortByValue:string) => set(() => ({
+        shortBy: newShortByValue
+    })),
+
+    // ------------------------------- //
+
+    // Step navigation
+    stepPage:1,
+    setStepPage: (newStepPage) => set(() => ({
+        stepPage: newStepPage
     }))
+
 }))
