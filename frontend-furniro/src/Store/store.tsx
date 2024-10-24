@@ -1,5 +1,5 @@
 // Import zustand
-import { create } from "zustand";
+import { create,  } from "zustand";
 
 // Interface
 interface ShopStoreProps{
@@ -8,10 +8,10 @@ interface ShopStoreProps{
     shortBy:string;
     setShortBy:(newShortByValue:string) => void;
     stepPage:number;
-    setStepPage:(newStep:number) => void
+    setStepPage:(newStep:number) => void;
 }
 
-// Filter store states
+// Shop store states
 export const shopStore = create<ShopStoreProps>((set) => ({
     // ------- Filter products ------- //
 

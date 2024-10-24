@@ -11,6 +11,7 @@ import { StoreInformation } from "../../Components/StoreInformation"
 import { CategoryCard } from "../../Components/Category-Card"
 import { ProductCard } from "../../Components/Product-Card"
 import { ShowMoreButton } from "../../Components/ShowMoreButton"
+import { Loading } from "../../Components/UI/Loading"
 
 // Axios
 import axios from "axios"
@@ -18,10 +19,15 @@ import axios from "axios"
 // css import
 import './home.css'
 
-
 export const Home = () => {
 
+    // State - loading
+    const [ isLoading, setIsLoading ] = useState<boolean>(true)
+
     useEffect(() => {
+        // Starting from the top of the page
+        window.scrollTo(0,0)
+
         // getCategories in database
         async function requestProductsAndCategories() {
             try {
@@ -36,6 +42,9 @@ export const Home = () => {
                 setCategories(categories.data)
             } catch (error) {
                 console.log(error)
+            } finally{
+                // Change state loading for false
+                setIsLoading(false)
             }
         }
 
@@ -48,6 +57,10 @@ export const Home = () => {
 
     // state products  
     const [products, setProducts] = useState<ProductProps[]>([])
+
+
+    // Return content with base in state loading
+    if(isLoading) return <Loading/>
 
     return (
         <main>
