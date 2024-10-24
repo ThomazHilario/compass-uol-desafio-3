@@ -1,6 +1,9 @@
 // React Router dom
 import { Link } from 'react-router-dom'
 
+// Components
+import { Newsletter } from '../Newsletter'
+
 // css import
 import './footer.css'
 
@@ -39,14 +42,7 @@ export const Footer = () => {
                         </ul>
                     </li>
 
-                    <li className='newsletter'>
-                        <h3>Newsletter</h3>
-
-                        <form>
-                            <input type="text" placeholder='Enter Your Email Address'/>
-                            <button type='submit'>SUBSCRIBE</button>
-                        </form>
-                    </li>
+                    <Newsletter />
                 </ul>
 
                 <hr />

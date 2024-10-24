@@ -81,31 +81,6 @@ footer{
                         font-weight: 500;
                     }
                 }
-
-                /* Newsletter css */
-                &:nth-child(4){
-                    form{
-                        display: flex;
-                        flex-direction: column;
-                        gap: 0.5rem;
-
-                        input{
-                            font-size: 0.8rem;
-                            outline: none;
-                            border:0;
-                            border-bottom: 1px solid black;
-                        }
-
-                        button{
-                            background-color: transparent;
-                            border-bottom: 1px solid black;
-                        }
-
-                        @media screen and (min-width:768px){
-                            flex-direction: row;
-                        }
-                    }
-                }
             }             
         }
     }
