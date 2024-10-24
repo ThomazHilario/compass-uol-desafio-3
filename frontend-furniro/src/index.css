@@ -22,3 +22,8 @@ a{
 ul{
   list-style: none;
 }
+
+/* Svg */
+svg{
+  pointer-events: none;
+}

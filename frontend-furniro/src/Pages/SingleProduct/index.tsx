@@ -177,12 +177,7 @@ export const SingleProduct = () => {
                     </section>
 
                     {/* Section add product in cart */}
-                    <section id="add__product__to__cart">
-                        <AddingProduct/>
-
-                        <button className="action__for__the__product">Add To Cart</button>
-                        <button className="action__for__the__product">Compare</button>
-                    </section>
+                    <AddingProduct product={product!}/>            
 
                     <hr />
 

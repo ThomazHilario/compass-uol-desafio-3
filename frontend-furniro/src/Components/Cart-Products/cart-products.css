@@ -1,0 +1,111 @@
+@keyframes animationContent {
+    0%{width: 15%;}
+}
+
+.root__user__interaction{
+
+    /* Content user interaction */
+    .content__user__interaction{
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+        transform: translate(-50%);
+        top: 0%;
+        right: -50%;
+        background-color: rgba(0, 0, 0, 0.352);
+        display: none;
+        justify-content: end;
+    }
+
+    /* Container cart list */
+    #container__cart__list{
+        animation: animationContent 0.5s ;
+        height: 100%;
+        width: 320px;
+        background-color: white;
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        /* Header content cart */
+        header{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            /* Close trigger */
+            button{
+                align-self: flex-start;
+                margin: 0 1rem;
+
+                svg{
+                    height: 30px;
+                }
+            }
+            
+        }
+
+        section{
+            width: 100%;
+            overflow-y: scroll;
+            height: 80%;
+
+            /* Card product */
+            .cart__card__product{
+                margin: 1rem 0;
+                display: flex;
+                gap: 0.5rem;
+                padding: 0 1rem;
+                width: 100%;
+
+                /* Image to card */
+                img{
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 0.1rem;
+                }
+
+                /* Article to product */
+                article{
+                    /* Title */
+                    h3{
+                        font-size: 1rem;
+                        font-weight: 500;
+                    }
+
+                    /* Label and input */
+                    div{
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        font-size: 0.9rem;
+
+                        input{
+                            border-radius: 0.1rem;
+                            height: 25px;
+                            width: 25px;
+                            text-align: center;
+                            border: 1px solid black;
+                        }
+                    }
+                }
+
+                /* Button remove product css */
+                button{
+                    height: 20px;
+                    width: 20px;
+                    position: absolute;
+                    right: 1%;
+                }
+
+            }
+
+            /* Paragraph css */
+            p{
+                text-align: center;
+            }
+        }
+    }
+}

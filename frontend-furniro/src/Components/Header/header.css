@@ -26,6 +26,7 @@
         }
     }
 
+    /* Navigation menu */
     nav{
         menu{
             display: none;
@@ -48,21 +49,16 @@
         }
     }
 
-    #user__interaction{
+    /* User interaction for desktop */
+    #user__interaction__desktop{
         display: none;
-        align-items: center;
-        gap: 3rem;
-
-        svg{
-            cursor: pointer;
-        }
 
         @media screen and (min-width:1024px){
-            display: flex;
+            display: block;
         }
     }
 
-
+    /* Header media-query */
     @media screen and (min-width:768px){
         justify-content: space-around;
     }
