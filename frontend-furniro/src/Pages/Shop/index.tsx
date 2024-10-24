@@ -16,6 +16,7 @@ import { AsideShop } from '../../Components/Aside-Shop'
 import { ProductCard } from '../../Components/Product-Card'
 import { ProductPagination } from '../../Components/Product-Pagination'
 import { StoreInformation } from '../../Components/StoreInformation'
+import { Loading } from '../../Components/UI/Loading'
 
 // Axios
 import axios from 'axios'
@@ -31,7 +32,13 @@ export const Shop = () => {
     // Store
     const { showQuantity, shortBy, stepPage } = shopStore(state => state)
 
+    // state - loading
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+
     useEffect(() => {
+        // Starting from the top of the page
+        window.scrollTo(0,0)
+        
         // Find Products in Database
         async function findProductsInDatabase(){
             try {
@@ -52,6 +59,9 @@ export const Shop = () => {
 
             } catch (error) {
                 console.log(error)
+            } finally{
+                // Change state loading for false
+                setIsLoading(false)
             }
         }
 
@@ -77,7 +87,7 @@ export const Shop = () => {
             <AsideShop />
 
             {/* Section for products */}
-            <section id='list__products'>
+            { !isLoading ? <section id='list__products'>
                 {/* Container products */}
                 <section className='container__products'>
                     {productsInLimit.map(product => (
@@ -87,7 +97,7 @@ export const Shop = () => {
 
                 {/* Pagination products */}
                 {!id && <ProductPagination totalPagesNavigation={totalPagesNavigation} />}
-            </section>
+            </section> : <Loading/>}
 
            {/* Store informatios */}
            <StoreInformation/>

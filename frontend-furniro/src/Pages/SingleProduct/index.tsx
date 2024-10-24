@@ -15,6 +15,7 @@ import { SizeProduct } from "../../Components/Size-Product"
 import { AddingProduct } from "../../Components/Adding-Product"
 import { AboutTabsProduct } from "../../Components/About-Tabs-Product"
 import { ProductCard } from "../../Components/Product-Card"
+import { Loading } from "../../Components/UI/Loading"
 
 // Axios
 import axios from "axios"
@@ -27,11 +28,16 @@ export const SingleProduct = () => {
     // Params
     const { id } = useParams()
 
-    useEffect(() => {
+    // State - loading
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
+    useEffect(() => {
         // Find specified product
         async function findSpecifiedProduct(){
             try {
+                // Change state loading for true
+                setIsLoading(true)
+
                 // Making request
                 const [productFounded, categoriesFounded] = await Promise.all([
                     axios.get(`http://localhost:3000/products/${id}`), 
@@ -50,6 +56,12 @@ export const SingleProduct = () => {
                 setProductsRelated(productsRelated.data)
             } catch (error) {
                 console.log(error)
+            } finally{
+                // Change state loading for false
+                setIsLoading(false)
+
+                // Starting from the top of the page
+                window.scrollTo(0,0)
             }
         }
 
@@ -86,6 +98,9 @@ export const SingleProduct = () => {
 
     // Price formated
     const priceWithDiscountOrNo = formatPrice(product?.price as number, product?.discount_price as number)
+
+    // Return content with base in state loading
+    if(isLoading) return <Loading/>
 
     return(
         <main id="container__singleproduct">
@@ -162,12 +177,7 @@ export const SingleProduct = () => {
                     </section>
 
                     {/* Section add product in cart */}
-                    <section id="add__product__to__cart">
-                        <AddingProduct/>
-
-                        <button className="action__for__the__product">Add To Cart</button>
-                        <button className="action__for__the__product">Compare</button>
-                    </section>
+                    <AddingProduct product={product!}/>            
 
                     <hr />
 

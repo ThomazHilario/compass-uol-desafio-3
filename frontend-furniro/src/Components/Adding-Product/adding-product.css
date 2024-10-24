@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     gap: 1.1rem;
 
+    /* Change state container */
     div{
         display: flex;
         justify-content: space-around;
@@ -18,6 +19,7 @@
         }
     }
 
+    /* Button css */
     .action__for__the__product{
         &:not(:first-child){
             width: 215px;
