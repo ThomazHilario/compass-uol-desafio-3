@@ -48,7 +48,7 @@ export const SingleProduct = () => {
                 const categoryId = categoriesFounded.data.find((category:CategoryProps) => category.id === productFounded.data.category_id).id
                 
                 // Request products related
-                const productsRelated = await axios.get(`http://localhost:3000/products?limit=4&category_id${categoryId}`)
+                const productsRelated = await axios.get(`http://localhost:3000/products?limit=4&category_id=${categoryId}`)
 
                 // Set data in state product, categories and products related
                 setProduct(productFounded.data)
