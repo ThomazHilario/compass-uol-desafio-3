@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 
 // React Router Dom
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 // Store
 import { shopStore } from '../../Store/store'
@@ -16,6 +16,7 @@ import { AsideShop } from '../../Components/Aside-Shop'
 import { ProductCard } from '../../Components/Product-Card'
 import { ProductPagination } from '../../Components/Product-Pagination'
 import { StoreInformation } from '../../Components/StoreInformation'
+import { NotFound } from '../../Components/Not-Found'
 import { Loading } from '../../Components/UI/Loading'
 
 // Axios
@@ -30,7 +31,7 @@ export const Shop = () => {
     const { id } = useParams()
 
     // Store
-    const { showQuantity, shortBy, stepPage } = shopStore(state => state)
+    const { showQuantity, shortBy, stepPage, setStepPage } = shopStore(state => state)
 
     // state - loading
     const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -42,10 +43,13 @@ export const Shop = () => {
         // Find Products in Database
         async function findProductsInDatabase(){
             try {
+                // Change state isLoading
+                setIsLoading(true)
+
                 // Making request
                 const products = await axios.get(`http://localhost:3000/products`, {
                     params:{
-                        limit:!id && Number(showQuantity) >= 16 ? showQuantity : 32,
+                        limit:Number(showQuantity) >= 16 ? showQuantity : 32,
                         page:stepPage,
                         orderBy:shortBy
                     }
@@ -65,18 +69,53 @@ export const Shop = () => {
             }
         }
 
-        // Exec findProductsInDatabase
-        findProductsInDatabase()
-    },[stepPage, showQuantity, id, shortBy])
+        // Find Products from category in database
+        async function findProductsFromCategoryInDatabase(){
+            try {
+                // Making Request products from category
+                const products = await axios.get(`http://localhost:3000/products`,{
+                    params:{
+                        limit:32,
+                        category_id:id,
+                        orderBy:shortBy
+                    }
+                })
+
+                // Save products in state
+                setProducts(products.data)
+            } catch (error) {
+                console.log(error)
+            } finally{
+                setIsLoading(false)
+            }
+        }
+
+        // Case not have id param
+        if(!id){
+            // Exec findProductsInDatabase
+            findProductsInDatabase()
+
+            // Change state message
+            setMessage('Não há produtos')
+            return
+        }
+
+        // Exec findProductsFromCategoryInDatabase
+        findProductsFromCategoryInDatabase()
+
+        // Change state message
+        setMessage('Não há produtos desta categoria !!')
+        
+    },[stepPage, setStepPage, showQuantity, id, shortBy])
+
+    // State - message
+    const [message, setMessage] = useState<string>('')
 
     // state - products
     const [products, setProducts] = useState<ProductProps[]>([])
 
     // state - Total pages
     const [totalPagesNavigation, setTotalPagesNavigation] = useState<number[]>([])
-
-    // Filter products with limit or with limit and category
-    const productsInLimit:ProductProps[] = !id ? products : products.filter(product => product.category_id === Number(id))
 
     return(
         <main>
@@ -87,13 +126,21 @@ export const Shop = () => {
             <AsideShop />
 
             {/* Section for products */}
-            { !isLoading ? <section id='list__products'>
+            {!isLoading ? <section id='list__products'>
                 {/* Container products */}
-                <section className='container__products'>
-                    {productsInLimit.map(product => (
-                        <ProductCard key={product.id} product={product}/>
-                    ))}
-                </section>
+                { products.length > 0 ? (
+                    <section className='container__products'>
+                        {products.map(product => (
+                            <ProductCard key={product.id} product={product}/>
+                        ))}
+                    </section>
+                ) : (
+                    <NotFound>
+                        <h1>{message}</h1>
+
+                        <Link to='/shop'>Buscar produtos</Link>
+                    </NotFound>
+                )}
 
                 {/* Pagination products */}
                 {!id && <ProductPagination totalPagesNavigation={totalPagesNavigation} />}
