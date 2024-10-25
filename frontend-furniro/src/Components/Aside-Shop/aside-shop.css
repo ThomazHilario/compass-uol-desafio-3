@@ -1,9 +1,5 @@
-:root{
-    --color-inputs-form:#9F9F9F;
-}
-
 aside{
-    background-color: #F9F1E7;  
+    background-color: var(--aside-color);  
     display: flex;
     justify-content: center;
     align-items: center;

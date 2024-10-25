@@ -1,9 +1,3 @@
-:root{
-    --store-information-color:#FAF3EA;
-    --primary-store-information-font-color: #242424;
-    --second-store-information-font-color: #898989;
-}
-
 .store__information{
     background-color: var(--store-information-color);
     width: 100%;

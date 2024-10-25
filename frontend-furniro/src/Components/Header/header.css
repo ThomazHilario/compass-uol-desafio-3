@@ -1,13 +1,8 @@
-:root{
-    --font-color:#000000;
-    --header-color:#FFFFFF;
-}
-
 #header{
     position: sticky;
     top: 0;
     z-index: 2;
-    background-color: var(--header-color);
+    background-color: var(--primary-color);
     display: flex;
     height: 10vh;
     justify-content: center;
@@ -22,7 +17,7 @@
         h1{
             font-size: 2.1rem;
             font-family: "Montserrat", sans-serif;
-            color: var(--font-color);
+            color: var(--second-color);
         }
     }
 
@@ -36,7 +31,7 @@
 
             /* links */
             li > a{
-                color: var(--font-color);
+                color: var(--second-color);
                 font-size: 1rem;
                 font-optical-sizing: auto;
                 font-weight: 500;
