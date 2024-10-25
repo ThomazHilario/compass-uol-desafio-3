@@ -246,7 +246,7 @@ export const SingleProduct = () => {
                 
                 {/* Links */}
                 <div className='container__links'>
-                    <Link to='/Home'>Ir para Home</Link>
+                    <Link to='/'>Ir para Home</Link>
                     <Link to='/shop'>Ir para shop</Link>
                 </div>
             </NotFound>
