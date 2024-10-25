@@ -94,7 +94,7 @@ aside{
                 }
 
                 /* Input show */
-                &:nth-child(1){
+                &#show__quantity__products{
                     input{
                         color: var(--color-inputs-form);
                         font-size: 1.1rem;
@@ -104,7 +104,7 @@ aside{
                 }
 
                 /* Input short by */
-                &:nth-child(2){
+                &#sort__products{
                     select{
                         color: var(--color-inputs-form);
                         font-size: 1.1rem;

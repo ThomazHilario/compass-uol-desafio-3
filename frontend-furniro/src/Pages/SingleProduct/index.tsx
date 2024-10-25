@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 
 // React Router Dom
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 // Interfaces
 import { ProductProps } from "../../Interfaces/product-type"
@@ -16,6 +16,7 @@ import { SizeProduct } from "../../Components/Size-Product"
 import { AddingProduct } from "../../Components/Adding-Product"
 import { AboutTabsProduct } from "../../Components/About-Tabs-Product"
 import { ProductCard } from "../../Components/Product-Card"
+import { NotFound } from "../../Components/Not-Found"
 import { Loading } from "../../Components/UI/Loading"
 
 // Axios
@@ -25,7 +26,6 @@ import axios from "axios"
 import './single-product.css'
 
 export const SingleProduct = () => {
-
     // Params
     const { id } = useParams()
 
@@ -33,41 +33,43 @@ export const SingleProduct = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        // Find specified product
-        async function findSpecifiedProduct(){
-            try {
-                // Change state loading for true
-                setIsLoading(true)
+        if(id){
+            // Find specified product
+            async function findSpecifiedProduct(){
+                try {
+                    // Change state loading for true
+                    setIsLoading(true)
 
-                // Making request
-                const [productFounded, categoriesFounded] = await Promise.all([
-                    axios.get(`http://localhost:3000/products/${id}`), 
-                    axios.get('http://localhost:3000/categories')
-                ])
+                    // Making request
+                    const [productFounded, categoriesFounded] = await Promise.all([
+                        axios.get(`http://localhost:3000/products/${id}`), 
+                        axios.get('http://localhost:3000/categories')
+                    ])
 
-                // Find Category id
-                const categoryId = categoriesFounded.data.find((category:CategoryProps) => category.id === productFounded.data.category_id).id
-                
-                // Request products related
-                const productsRelated = await axios.get(`http://localhost:3000/products?limit=4&category_id=${categoryId}`)
+                    // Find Category id
+                    const categoryId = categoriesFounded.data.find((category:CategoryProps) => category.id === productFounded.data.category_id).id
+                    
+                    // Request products related
+                    const productsRelated = await axios.get(`http://localhost:3000/products?limit=4&category_id=${categoryId}`)
 
-                // Set data in state product, categories and products related
-                setProduct(productFounded.data)
-                setCategories(categoriesFounded.data)
-                setProductsRelated(productsRelated.data)
-            } catch (error) {
-                console.log(error)
-            } finally{
-                // Change state loading for false
-                setIsLoading(false)
+                    // Set data in state product, categories and products related
+                    setProduct(productFounded.data)
+                    setCategories(categoriesFounded.data)
+                    setProductsRelated(productsRelated.data)
+                } catch (error) {
+                    console.log(error)
+                } finally{
+                    // Change state loading for false
+                    setIsLoading(false)
 
-                // Starting from the top of the page
-                window.scrollTo(0,0)
+                    // Starting from the top of the page
+                    window.scrollTo(0,0)
+                }
             }
-        }
 
-        // Exec findSpecifiedProduct
-        findSpecifiedProduct()
+            // Exec findSpecifiedProduct
+            findSpecifiedProduct()
+        }
         
     }, [id])
 
@@ -232,6 +234,22 @@ export const SingleProduct = () => {
                 {/* Horizontal line */}
                 <hr className="horizontal__line" />
             </main>
+        )
+    }else{
+        return (
+            <NotFound>
+                {/* Title */}
+                <h1>&#128549; Este produto não existe!! &#128557;</h1>
+
+                {/* Subtitle */}
+                <h2>&#128071; Ir para: &#128071;</h2>
+                
+                {/* Links */}
+                <div className='container__links'>
+                    <Link to='/Home'>Ir para Home</Link>
+                    <Link to='/shop'>Ir para shop</Link>
+                </div>
+            </NotFound>
         )
     }
 }

@@ -82,10 +82,21 @@ export class ProductsRepository{
                     })
                 }
 
+                // Return products with base category from product
                 if(categoryId){
-                    return products.filter(product => product.category_id === categoryId).slice(0, limit)
+                    // Filter products to products base with category
+                    const productsToCategory = products.filter(product => product.category_id === categoryId).slice(0, limit)
+
+                    // Case have param orderBy
+                    if(orderBy){
+                        return sortTypes[orderBy](productsToCategory).slice(0, limit)
+                    }
+
+                    //Return productsToCategory
+                    return productsToCategory
                 }
 
+                // Return products in order type
                 if(orderBy){
                     return sortTypes[orderBy](products).slice(0, limit)
                 }

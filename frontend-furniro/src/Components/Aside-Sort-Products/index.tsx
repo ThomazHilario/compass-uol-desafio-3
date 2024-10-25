@@ -1,7 +1,14 @@
+// React rounter dom
+import { useParams } from "react-router-dom";
+
 // Store
 import { shopStore } from "../../Store/store";
 
 export const SortProducts = ({min, max}:{min:number, max:number}) => {
+
+    // Params
+    const { id } = useParams()
+
     // Store 
     const { 
         showQuantity, 
@@ -10,7 +17,6 @@ export const SortProducts = ({min, max}:{min:number, max:number}) => {
         shortBy, 
         setShortBy 
     } = shopStore(state => state)
-
 
     // Change show quantity
     function changeShowQuantity(value:string){
@@ -46,18 +52,20 @@ export const SortProducts = ({min, max}:{min:number, max:number}) => {
 
     return(
         <form>
-            <div>
-                <label htmlFor="ishow">Show</label>
-                <input 
-                    type="text" 
-                    id='ishow' 
-                    value={showQuantity}
-                    onChange={(e) => changeShowQuantity(e.target.value)}
-                    maxLength={2}
-                />
-            </div>
+            {!id && (
+                <div id="show__quantity__products">
+                    <label htmlFor="ishow">Show</label>
+                    <input 
+                        type="text" 
+                        id='ishow' 
+                        value={showQuantity}
+                        onChange={(e) => changeShowQuantity(e.target.value)}
+                        maxLength={2}
+                    />
+                </div>
+            )}
 
-            <div>
+            <div id="sort__products">
                 <label htmlFor="ishort">Short by</label>
                 <select name="sortProducts" value={shortBy} id="ishort" onChange={(e) => setShortBy(e.target.value)}>
                     <option value="default">Default</option>
