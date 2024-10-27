@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "build:frontend":"cd frontend-furniro && npm install && npm run build",
+        "build:backend":"cd backend-furniro && npm install && npm run build",
+        "build":"npm run build:frontend-furniro && npm run build:backend-furniro"
+    }
+}
